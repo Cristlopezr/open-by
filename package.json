@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "pnpm -r --parallel dev",
         "dev:mobile": "pnpm --filter @open-by/mobile dev",
-        "dev:backend": "pnpm --filter @open-by/backend dev",
+        "dev:api": "pnpm --filter @open-by/api dev",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
