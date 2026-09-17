@@ -2,6 +2,8 @@ oldApps
 
 .env
 
+postgres
+
 node_modules
 
 docs/

@@ -7,6 +7,7 @@
         "dev": "pnpm -r --parallel dev",
         "dev:mobile": "pnpm --filter @open-by/mobile dev",
         "dev:api": "pnpm --filter @open-by/api dev",
+        "db:up": "docker compose --env-file apps/api/.env up -d",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
