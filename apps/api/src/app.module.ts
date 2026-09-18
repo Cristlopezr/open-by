@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './config/env.config';
 import { DrizzleModule } from './db/drizzle.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -12,8 +11,9 @@ import { DrizzleModule } from './db/drizzle.module';
       validationSchema: envSchema,
     }),
     DrizzleModule,
+    ProductsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

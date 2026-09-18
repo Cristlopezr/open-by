@@ -10,6 +10,7 @@ import {
   check,
   jsonb,
   text,
+  boolean,
 } from 'drizzle-orm/pg-core';
 
 export const openingRuleVerificationStatus = pgEnum(
@@ -46,6 +47,7 @@ export const productsTable = pgTable('products', {
   name: varchar({ length: 255 }).notNull(),
   quantity: varchar({ length: 64 }),
   country_code: varchar({ length: 2 }).notNull(),
+  active: boolean().notNull().default(true),
   created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   updated_at: timestamp({ withTimezone: true })
     .notNull()
