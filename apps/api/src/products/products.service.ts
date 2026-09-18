@@ -59,7 +59,12 @@ export class ProductsService {
     const [product] = await this.db
       .select()
       .from(productsTable)
-      .where(eq(productsTable.barcode, barcode))
+      .where(
+        and(
+          eq(productsTable.barcode, barcode),
+          eq(productsTable.active, true),
+        ),
+      )
       .limit(1);
 
     if (!product) {
