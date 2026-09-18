@@ -1,17 +1,35 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import type { UpdateProductDto } from './dto/update-product.dto';
 import { DrizzleProvider, type Database } from '../db/drizzle.provider';
 import { productsTable } from '../db/schema';
 import { and, eq, ilike, type SQL } from 'drizzle-orm';
 import type { FindProductsQueryDto } from './dto/find-products-query.dto';
+import { isPostgresUniqueViolation } from '../common/database/postgres-error.utils';
 
 @Injectable()
 export class ProductsService {
   constructor(@Inject(DrizzleProvider) private readonly db: Database) {}
 
   async create(createProductDto: CreateProductDto) {
-    return this.db.insert(productsTable).values(createProductDto).returning();
+    try {
+      return await this.db
+        .insert(productsTable)
+        .values(createProductDto)
+        .returning();
+    } catch (error) {
+      if (isPostgresUniqueViolation(error)) {
+        throw new ConflictException(
+          'A product with this barcode already exists',
+        );
+      }
+      throw error;
+    }
   }
 
   findAll(query: FindProductsQueryDto) {
@@ -46,25 +64,6 @@ export class ProductsService {
       .select()
       .from(productsTable)
       .where(eq(productsTable.id, id))
-      .limit(1);
-
-    if (!product) {
-      throw new NotFoundException('Product not found');
-    }
-
-    return product;
-  }
-
-  async findByBarcode(barcode: string) {
-    const [product] = await this.db
-      .select()
-      .from(productsTable)
-      .where(
-        and(
-          eq(productsTable.barcode, barcode),
-          eq(productsTable.active, true),
-        ),
-      )
       .limit(1);
 
     if (!product) {

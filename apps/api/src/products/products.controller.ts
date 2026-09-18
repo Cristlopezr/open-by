@@ -23,12 +23,8 @@ import {
   findProductsQuerySchema,
   type FindProductsQueryDto,
 } from './dto/find-products-query.dto';
-import {
-  findProductByBarcodeParamsSchema,
-  type FindProductByBarcodeParamsDto,
-} from './dto/find-product-by-barcode-params.dto';
 
-@Controller('products')
+@Controller('admin/products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
@@ -46,14 +42,6 @@ export class ProductsController {
     query: FindProductsQueryDto,
   ) {
     return this.productsService.findAll(query);
-  }
-
-  @Get('barcode/:barcode')
-  findByBarcode(
-    @Param(new ZodValidationPipe(findProductByBarcodeParamsSchema))
-    params: FindProductByBarcodeParamsDto,
-  ) {
-    return this.productsService.findByBarcode(params.barcode);
   }
 
   @Get(':id')

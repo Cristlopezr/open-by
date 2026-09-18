@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { createProductSchema } from './create-product.dto';
 
 export const updateProductSchema = createProductSchema
+  .omit({ barcode: true })
   .partial()
   .extend({
     active: z.boolean().optional(),
