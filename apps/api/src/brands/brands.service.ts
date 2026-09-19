@@ -5,7 +5,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { asc, eq, ilike } from 'drizzle-orm';
-import { isPostgresUniqueViolation } from '../common/database/postgres-error.utils';
+import {
+  isPostgresForeignKeyViolation,
+  isPostgresUniqueViolation,
+} from '../common/database/postgres-error.utils';
 import { DrizzleProvider, type Database } from '../db/drizzle.provider';
 import { brandsTable } from '../db/schema';
 import { normalizeBrandName } from './utils/brand-name.utils';
@@ -88,6 +91,28 @@ export class BrandsService {
     } catch (error) {
       if (isPostgresUniqueViolation(error)) {
         throw new ConflictException('A brand with this name already exists');
+      }
+      throw error;
+    }
+  }
+
+  async remove(id: string) {
+    try {
+      const [brand] = await this.db
+        .delete(brandsTable)
+        .where(eq(brandsTable.id, id))
+        .returning();
+
+      if (!brand) {
+        throw new NotFoundException('Brand not found');
+      }
+
+      return brand;
+    } catch (error) {
+      if (isPostgresForeignKeyViolation(error)) {
+        throw new ConflictException(
+          'Brand cannot be deleted because it is used by one or more products',
+        );
       }
       throw error;
     }

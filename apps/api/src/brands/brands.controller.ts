@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -49,5 +50,10 @@ export class BrandsController {
     updateBrandDto: UpdateBrandDto,
   ) {
     return this.brandsService.update(id, updateBrandDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.brandsService.remove(id);
   }
 }
