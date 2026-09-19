@@ -5,12 +5,14 @@ import {
   seedBrands,
   seedEvidence,
   seedOpeningRules,
+  seedProductCategories,
   seedProducts,
 } from './seed-data';
 import {
   brandsTable,
   evidenceTable,
   openingRulesTable,
+  productCategoriesTable,
   productsTable,
 } from './schema';
 
@@ -32,6 +34,10 @@ const db = drizzle({ client: pool });
 async function seed() {
   await db.transaction(async (tx) => {
     await tx.insert(brandsTable).values(seedBrands).onConflictDoNothing();
+    await tx
+      .insert(productCategoriesTable)
+      .values(seedProductCategories)
+      .onConflictDoNothing();
     await tx.insert(productsTable).values(seedProducts).onConflictDoNothing();
     await tx
       .insert(openingRulesTable)

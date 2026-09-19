@@ -16,11 +16,39 @@ export const seedBrands = [
   },
 ];
 
+export const seedProductCategories = [
+  {
+    id: '50000000-0000-4000-8000-000000000001',
+    slug: 'sin-categoria',
+    name: 'Sin categoría',
+    normalized_name: 'sin categoria',
+  },
+  {
+    id: '50000000-0000-4000-8000-000000000002',
+    slug: 'lacteos',
+    name: 'Lácteos',
+    normalized_name: 'lacteos',
+  },
+  {
+    id: '50000000-0000-4000-8000-000000000003',
+    slug: 'salsas',
+    name: 'Salsas',
+    normalized_name: 'salsas',
+  },
+  {
+    id: '50000000-0000-4000-8000-000000000004',
+    slug: 'bebidas',
+    name: 'Bebidas',
+    normalized_name: 'bebidas',
+  },
+];
+
 export const seedProducts = [
   {
     id: '20000000-0000-4000-8000-000000000001',
     barcode: '7800000000001',
     brand_id: '10000000-0000-4000-8000-000000000001',
+    category_id: '50000000-0000-4000-8000-000000000002',
     name: 'Leche entera',
     quantity: '1 L',
     country_code: 'CL',
@@ -31,6 +59,7 @@ export const seedProducts = [
     id: '20000000-0000-4000-8000-000000000002',
     barcode: '7800000000002',
     brand_id: '10000000-0000-4000-8000-000000000002',
+    category_id: '50000000-0000-4000-8000-000000000003',
     name: 'Salsa de tomate',
     quantity: '340 g',
     country_code: 'CL',
@@ -41,6 +70,7 @@ export const seedProducts = [
     id: '20000000-0000-4000-8000-000000000003',
     barcode: '7800000000003',
     brand_id: '10000000-0000-4000-8000-000000000003',
+    category_id: '50000000-0000-4000-8000-000000000004',
     name: 'Jugo de naranja',
     quantity: '1.5 L',
     country_code: 'CL',

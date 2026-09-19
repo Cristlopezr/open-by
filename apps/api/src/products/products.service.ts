@@ -8,10 +8,21 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import type { UpdateProductDto } from './dto/update-product.dto';
 import { DrizzleProvider, type Database } from '../db/drizzle.provider';
-import { brandsTable, productsTable } from '../db/schema';
-import { and, eq, ilike, type SQL } from 'drizzle-orm';
+import {
+  brandsTable,
+  productCategoriesTable,
+  productsTable,
+} from '../db/schema';
+import { and, eq, getTableColumns, ilike, type SQL } from 'drizzle-orm';
 import type { FindProductsQueryDto } from './dto/find-products-query.dto';
 import { isPostgresUniqueViolation } from '../common/database/postgres-error.utils';
+
+const productWithCategory = {
+  ...getTableColumns(productsTable),
+  category: {
+    ...getTableColumns(productCategoriesTable),
+  },
+};
 
 @Injectable()
 export class ProductsService {
@@ -19,12 +30,15 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto) {
     await this.ensureBrandExists(createProductDto.brand_id);
+    await this.ensureCategoryExists(createProductDto.category_id);
 
     try {
-      return await this.db
+      const [product] = await this.db
         .insert(productsTable)
         .values(createProductDto)
         .returning();
+
+      return product;
     } catch (error) {
       if (isPostgresUniqueViolation(error)) {
         throw new ConflictException(
@@ -55,17 +69,25 @@ export class ProductsService {
     }
 
     return this.db
-      .select()
+      .select(productWithCategory)
       .from(productsTable)
+      .innerJoin(
+        productCategoriesTable,
+        eq(productsTable.category_id, productCategoriesTable.id),
+      )
       .where(and(...filters))
       .limit(query.limit)
       .offset(query.offset);
   }
 
-  async findOne(id: string) {
+  async findOneWithCategory(id: string) {
     const [product] = await this.db
-      .select()
+      .select(productWithCategory)
       .from(productsTable)
+      .innerJoin(
+        productCategoriesTable,
+        eq(productsTable.category_id, productCategoriesTable.id),
+      )
       .where(eq(productsTable.id, id))
       .limit(1);
 
@@ -77,10 +99,13 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
-    await this.findOne(id);
+    await this.findOneProduct(id);
 
     if (updateProductDto.brand_id) {
       await this.ensureBrandExists(updateProductDto.brand_id);
+    }
+    if (updateProductDto.category_id) {
+      await this.ensureCategoryExists(updateProductDto.category_id);
     }
 
     const [product] = await this.db
@@ -89,25 +114,21 @@ export class ProductsService {
       .where(eq(productsTable.id, id))
       .returning();
 
-    if (!product) {
-      throw new NotFoundException('Product not found');
-    }
-
     return product;
   }
 
   async deactivate(id: string) {
-    const products = await this.db
+    const [product] = await this.db
       .update(productsTable)
       .set({ active: false })
       .where(eq(productsTable.id, id))
       .returning();
 
-    if (products.length === 0) {
+    if (!product) {
       throw new NotFoundException('Product not found');
     }
 
-    return products;
+    return product;
   }
 
   private async ensureBrandExists(brandId: string) {
@@ -119,6 +140,32 @@ export class ProductsService {
 
     if (!brand) {
       throw new UnprocessableEntityException('Brand not found');
+    }
+  }
+
+  private async findOneProduct(id: string) {
+    const [product] = await this.db
+      .select()
+      .from(productsTable)
+      .where(eq(productsTable.id, id))
+      .limit(1);
+
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+
+    return product;
+  }
+
+  private async ensureCategoryExists(categoryId: string) {
+    const [category] = await this.db
+      .select({ id: productCategoriesTable.id })
+      .from(productCategoriesTable)
+      .where(eq(productCategoriesTable.id, categoryId))
+      .limit(1);
+
+    if (!category) {
+      throw new UnprocessableEntityException('Category not found');
     }
   }
 }
