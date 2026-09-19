@@ -7,6 +7,7 @@ import {
 export const createProductSchema = z.object({
   barcode: productBarcodeSchema,
   brand_id: z.uuid('Brand id must be a valid uuid'),
+  category_id: z.uuid('Category id must be a valid uuid'),
   name: z.string().trim().min(1, 'Name is required').max(255),
   quantity: z.string().trim().max(64).optional(),
   image_url: productImageUrlSchema.nullable().optional(),

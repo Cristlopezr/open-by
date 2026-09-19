@@ -43,12 +43,28 @@ export const brandsTable = pgTable('brands', {
     .$onUpdate(() => new Date()),
 });
 
+export const productCategoriesTable = pgTable('product_categories', {
+  id: uuid().defaultRandom().primaryKey(),
+  slug: varchar({ length: 100 }).notNull().unique(),
+  name: varchar({ length: 255 }).notNull(),
+  normalized_name: varchar({ length: 255 }).notNull().unique(),
+  active: boolean().notNull().default(true),
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp({ withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
 export const productsTable = pgTable('products', {
   id: uuid().defaultRandom().primaryKey(),
   barcode: varchar({ length: 32 }).notNull().unique(),
   brand_id: uuid()
     .notNull()
     .references(() => brandsTable.id),
+  category_id: uuid()
+    .notNull()
+    .references(() => productCategoriesTable.id),
   name: varchar({ length: 255 }).notNull(),
   quantity: varchar({ length: 64 }),
   image_url: varchar({ length: 2048 }),

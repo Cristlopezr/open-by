@@ -5,6 +5,7 @@ import { DrizzleProvider, type Database } from '../db/drizzle.provider';
 import {
   brandsTable,
   openingRulesTable,
+  productCategoriesTable,
   productsTable,
 } from '../db/schema';
 import type { FindCatalogBrandsQueryDto } from './dto/find-catalog-brands-query.dto';
@@ -26,6 +27,11 @@ export class CatalogService {
           id: brandsTable.id,
           name: brandsTable.name,
         },
+        category: {
+          id: productCategoriesTable.id,
+          slug: productCategoriesTable.slug,
+          name: productCategoriesTable.name,
+        },
         openingRule: {
           durationHours: openingRulesTable.duration_hours,
           storageCondition: openingRulesTable.storage_condition,
@@ -37,6 +43,10 @@ export class CatalogService {
       .from(productsTable)
       .innerJoin(brandsTable, eq(productsTable.brand_id, brandsTable.id))
       .innerJoin(
+        productCategoriesTable,
+        eq(productsTable.category_id, productCategoriesTable.id),
+      )
+      .innerJoin(
         openingRulesTable,
         and(
           eq(openingRulesTable.product_id, productsTable.id),
@@ -47,6 +57,7 @@ export class CatalogService {
         and(
           eq(productsTable.barcode, barcode),
           eq(productsTable.active, true),
+          eq(productCategoriesTable.active, true),
         ),
       )
       .limit(1);
