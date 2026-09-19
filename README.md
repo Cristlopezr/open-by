@@ -17,4 +17,4 @@ account.
 
 ## Project Status
 
-OpenBy is currently in the early stages of MVP development.
+OpenBy is currently in the early stages of development.
