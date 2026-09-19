@@ -15,6 +15,13 @@
       "when": 1789781782216,
       "tag": "0001_fancy_reavers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789842134696,
+      "tag": "0002_burly_blur",
+      "breakpoints": true
     }
   ]
 }
