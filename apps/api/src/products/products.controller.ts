@@ -59,7 +59,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(id);
+  deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
+    return this.productsService.deactivate(id);
   }
 }
