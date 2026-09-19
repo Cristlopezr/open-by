@@ -46,6 +46,7 @@ export const productsTable = pgTable('products', {
     .references(() => brandsTable.id),
   name: varchar({ length: 255 }).notNull(),
   quantity: varchar({ length: 64 }),
+  image_url: varchar({ length: 2048 }),
   country_code: varchar({ length: 2 }).notNull(),
   active: boolean().notNull().default(true),
   created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
