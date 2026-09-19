@@ -36,6 +36,11 @@ export const brandsTable = pgTable('brands', {
   id: uuid().defaultRandom().primaryKey(),
   name: varchar({ length: 255 }).notNull(),
   normalized_name: varchar({ length: 255 }).notNull().unique(),
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp({ withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 });
 
 export const productsTable = pgTable('products', {
