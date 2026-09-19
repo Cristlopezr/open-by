@@ -3,11 +3,12 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import type { UpdateProductDto } from './dto/update-product.dto';
 import { DrizzleProvider, type Database } from '../db/drizzle.provider';
-import { productsTable } from '../db/schema';
+import { brandsTable, productsTable } from '../db/schema';
 import { and, eq, ilike, type SQL } from 'drizzle-orm';
 import type { FindProductsQueryDto } from './dto/find-products-query.dto';
 import { isPostgresUniqueViolation } from '../common/database/postgres-error.utils';
@@ -17,6 +18,8 @@ export class ProductsService {
   constructor(@Inject(DrizzleProvider) private readonly db: Database) {}
 
   async create(createProductDto: CreateProductDto) {
+    await this.ensureBrandExists(createProductDto.brand_id);
+
     try {
       return await this.db
         .insert(productsTable)
@@ -74,6 +77,12 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
+    await this.findOne(id);
+
+    if (updateProductDto.brand_id) {
+      await this.ensureBrandExists(updateProductDto.brand_id);
+    }
+
     const [product] = await this.db
       .update(productsTable)
       .set(updateProductDto)
@@ -87,11 +96,29 @@ export class ProductsService {
     return product;
   }
 
-  remove(id: string) {
-    return this.db
+  async deactivate(id: string) {
+    const products = await this.db
       .update(productsTable)
       .set({ active: false })
       .where(eq(productsTable.id, id))
       .returning();
+
+    if (products.length === 0) {
+      throw new NotFoundException('Product not found');
+    }
+
+    return products;
+  }
+
+  private async ensureBrandExists(brandId: string) {
+    const [brand] = await this.db
+      .select({ id: brandsTable.id })
+      .from(brandsTable)
+      .where(eq(brandsTable.id, brandId))
+      .limit(1);
+
+    if (!brand) {
+      throw new UnprocessableEntityException('Brand not found');
+    }
   }
 }
