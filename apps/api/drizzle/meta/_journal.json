@@ -8,6 +8,13 @@
       "when": 1789703380555,
       "tag": "0000_wealthy_ozymandias",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1789781782216,
+      "tag": "0001_fancy_reavers",
+      "breakpoints": true
     }
   ]
 }

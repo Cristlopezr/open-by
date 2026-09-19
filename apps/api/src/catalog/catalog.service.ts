@@ -20,6 +20,7 @@ export class CatalogService {
         barcode: productsTable.barcode,
         name: productsTable.name,
         quantity: productsTable.quantity,
+        image_url: productsTable.image_url,
         countryCode: productsTable.country_code,
         brand: {
           id: brandsTable.id,
