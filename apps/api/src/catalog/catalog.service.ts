@@ -70,19 +70,22 @@ export class CatalogService {
   }
 
   findBrands(query: FindCatalogBrandsQueryDto) {
+    const nameFilter = query.name
+      ? ilike(
+          brandsTable.normalized_name,
+          `%${normalizeBrandName(query.name)}%`,
+        )
+      : undefined;
+
     return this.db
       .select({
         id: brandsTable.id,
         name: brandsTable.name,
       })
       .from(brandsTable)
-      .where(
-        ilike(
-          brandsTable.normalized_name,
-          `%${normalizeBrandName(query.name)}%`,
-        ),
-      )
+      .where(nameFilter)
       .orderBy(asc(brandsTable.name))
-      .limit(query.limit);
+      .limit(query.limit)
+      .offset(query.offset);
   }
 }
