@@ -9,7 +9,9 @@ import {
   findCatalogProductByBarcodeParamsSchema,
   type FindCatalogProductByBarcodeParamsDto,
 } from './dto/find-catalog-product-by-barcode-params.dto';
+import { AllowAnonymous } from '@thallesp/nestjs-better-auth';
 
+@AllowAnonymous()
 @Controller('catalog')
 export class CatalogController {
   constructor(private readonly catalogService: CatalogService) {}
