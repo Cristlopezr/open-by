@@ -1,4 +1,4 @@
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 
 import { ScannerVisuals } from "@/components/scanner/ScannerVisuals";
 import { usePreviewState, visualRoutes } from "@/features/mvp-visual/state";
@@ -15,14 +15,10 @@ export function ScannerScreen() {
   };
 
   return (
-    <>
-      <Stack.Screen options={{ animation: "fade" }} />
-      <ScannerVisuals
-        state={state}
-        onClose={() => router.replace(visualRoutes.home)}
-        onRetry={() => setState("ready")}
-        onAdvance={advance}
-      />
-    </>
+    <ScannerVisuals
+      state={state}
+      onRetry={() => setState("ready")}
+      onAdvance={advance}
+    />
   );
 }

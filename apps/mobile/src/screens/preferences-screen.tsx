@@ -1,7 +1,6 @@
 import { Link } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Switch, View } from "react-native";
-import { BottomNavigation } from "@/components/navigation/BottomNavigation";
 import { AppIcon } from "@/components/ui/AppIcon";
 import { ChoiceChip, PageHeader } from "@/components/ui/DesignSystem";
 import {
@@ -126,7 +125,6 @@ export function PreferencesScreen() {
           </AppText>
         </View>
       </Screen>
-      <BottomNavigation active="preferences" />
     </View>
   );
 }

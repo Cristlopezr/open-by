@@ -1,5 +1,5 @@
 import { SymbolView, type AndroidSymbol, type SFSymbol } from "expo-symbols";
-import { Text, type StyleProp, type ViewStyle } from "react-native";
+import { Text, type ColorValue, type StyleProp, type ViewStyle } from "react-native";
 
 export type AppIconName =
   | "home"
@@ -83,7 +83,7 @@ const icons: Record<
 
 interface AppIconProps {
   name: AppIconName;
-  color: string;
+  color: ColorValue;
   size?: number;
   style?: StyleProp<ViewStyle>;
 }

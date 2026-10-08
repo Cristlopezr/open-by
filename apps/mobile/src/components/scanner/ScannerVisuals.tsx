@@ -17,12 +17,10 @@ import {
 
 export function ScannerVisuals({
   state,
-  onClose,
   onRetry,
   onAdvance,
 }: {
   state: ScannerPreviewState;
-  onClose: () => void;
   onRetry: () => void;
   onAdvance: () => void;
 }) {
@@ -32,13 +30,13 @@ export function ScannerVisuals({
   return (
     <SafeAreaView
       style={[s.root, { backgroundColor: colors.background }]}
-      edges={["top", "bottom"]}
+      edges={["top"]}
     >
       <View style={s.header}>
         <PageHeader
-          title="Escáner de códigos de barras"
-          subtitle="Busca un producto en el catálogo"
-          onBack={onClose}
+          title="OpenBy"
+          subtitle="Escanear productos"
+          accountHref={visualRoutes.account}
         />
       </View>
       <View style={[s.camera, { backgroundColor: colors.surfaceSecondary }]}>

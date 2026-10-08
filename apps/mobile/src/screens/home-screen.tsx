@@ -7,7 +7,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { BottomNavigation } from "@/components/navigation/BottomNavigation";
 import { InventorySummary } from "@/components/home/InventorySummary";
 import { InventoryGroup } from "@/components/home/InventoryGroup";
 import { AppIcon } from "@/components/ui/AppIcon";
@@ -189,7 +188,6 @@ export function HomeScreen() {
           </View>
         </View>
       </Screen>
-      <BottomNavigation active="home" />
     </View>
   );
 }
