@@ -5,7 +5,7 @@ import { products } from "@/features/mvp-visual/fixtures";
 import { usePreviewState, visualRoutes } from "@/features/mvp-visual/state";
 import type { ConfirmPreviewState } from "@/features/mvp-visual/types";
 
-export default function ConfirmOpeningScreen() {
+export function ConfirmOpeningScreen() {
   const router = useRouter();
   const [state, setState] = usePreviewState<ConfirmPreviewState>("known");
   const product = state === "unknown" ? products[3] : products[0];

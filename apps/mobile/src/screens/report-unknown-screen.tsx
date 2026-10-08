@@ -8,7 +8,7 @@ import { usePreviewState, visualRoutes } from "@/features/mvp-visual/state";
 import type { ReportPreviewState } from "@/features/mvp-visual/types";
 import { sizes, spacing } from "@/theme/tokens";
 
-export default function ReportUnknownScreen() {
+export function ReportUnknownScreen() {
   const router = useRouter();
   const [state, setState] = usePreviewState<ReportPreviewState>("ready");
   const submit = () => {

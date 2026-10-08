@@ -12,7 +12,7 @@ const themeOptions: { value: ThemeChoice; label: string; icon: AppIconName }[] =
   { value: "system", label: "System", icon: "system" },
 ];
 
-export function PreferencesContent({ state }: { state: PreferencesPreviewState }) {
+export function PreferencesContent({ state, onOpenAccount }: { state: PreferencesPreviewState; onOpenAccount: () => void }) {
   const { choice, appearance, colors, setChoice } = useVisualTheme();
   const denied = state === "notificationsDenied";
 
@@ -71,6 +71,18 @@ export function PreferencesContent({ state }: { state: PreferencesPreviewState }
 
       <PreferenceSection icon="shield" title="Data and Privacy" subtitle="Your inventory, your choice">
         <AppText color={colors.textSecondary}>Without an account, your personal inventory remains on this device and is not sent to the backend.</AppText>
+      </PreferenceSection>
+
+      <PreferenceSection icon="cloud" title="Account and backup" subtitle="Keep your opened products with you">
+        <View style={styles.settingRow}>
+          <View style={styles.settingCopy}>
+            <AppText variant="label">Cloud backup</AppText>
+            <AppText color={colors.textSecondary}>Set up or review account access</AppText>
+          </View>
+          <Pressable accessibilityRole="button" onPress={onOpenAccount}>
+            <AppText variant="label" color={colors.primary}>Open</AppText>
+          </Pressable>
+        </View>
       </PreferenceSection>
 
       <PreferenceSection icon="info" title="About OpenBy" subtitle="Simple freshness, less waste">

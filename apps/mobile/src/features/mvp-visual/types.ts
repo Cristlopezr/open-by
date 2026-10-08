@@ -8,11 +8,14 @@ export interface ProductFixture {
   id: string;
   name?: string;
   brand?: string;
+  quantity?: string;
   categoryLabel: string;
   barcode: string;
   categoryIcon: "milk" | "jar" | "bottle" | "food";
   openedAtLabel: string;
   lifetimeLabel?: string;
+  storageCondition?: string;
+  storageInstruction?: string;
   expirationLabel?: string;
   remainingLabel: string;
   status: ExpirationStatus;

@@ -23,22 +23,13 @@ export function HomeProductTable({
 }) {
   const { colors } = useVisualTheme();
   return (
-    <View style={[styles.table, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-      <View
-        style={[
-          styles.header,
-          { backgroundColor: colors.surfaceSecondary, borderBottomColor: colors.border },
-        ]}
-      >
-        <AppText variant="caption" color={colors.textSecondary} style={styles.identity}>
-          Product
-        </AppText>
-        <AppText variant="caption" color={colors.textSecondary} style={styles.status}>
-          Status
-        </AppText>
-        <AppText variant="caption" color={colors.textSecondary} style={styles.time}>
-          Time
-        </AppText>
+    <View style={styles.table}>
+      <View style={styles.header}>
+        <View style={styles.headingCopy}>
+          <AppText variant="heading">Tracked items</AppText>
+          <AppText variant="caption" color={colors.textSecondary}>{products.length} visible · sorted by urgency</AppText>
+        </View>
+        <View style={[styles.count, { backgroundColor: colors.surfaceSecondary }]}><AppText variant="caption" color={colors.textSecondary}>{products.length}</AppText></View>
       </View>
       <FlatList
         data={products}
@@ -47,7 +38,7 @@ export function HomeProductTable({
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={<HomeNoResults />}
         renderItem={({ item }) => <ProductRow product={item} onPress={() => onSelect(item)} />}
-        style={styles.list}
+        contentContainerStyle={styles.list}
       />
     </View>
   );
@@ -66,7 +57,7 @@ function ProductRow({ product, onPress }: { product: ProductFixture; onPress: ()
       style={({ pressed }) => [
         styles.row,
         {
-          borderBottomColor: colors.border,
+          borderColor: colors.border,
           backgroundColor: pressed ? colors.surfaceSecondary : colors.surface,
         },
       ]}
@@ -89,24 +80,30 @@ function ProductRow({ product, onPress }: { product: ProductFixture; onPress: ()
         </View>
       </View>
       <View style={styles.status}>
-        <AppIcon name={status.icon} color={color} size={14} />
-        <AppText variant="caption" color={color} numberOfLines={1}>{status.label}</AppText>
+        <View style={[styles.statusPill, { backgroundColor: `${color}1A` }]}>
+          <AppIcon name={status.icon} color={color} size={13} />
+          <AppText variant="caption" color={color} numberOfLines={1}>{status.label}</AppText>
+        </View>
       </View>
-      <AppText variant="label" color={color} style={styles.time} numberOfLines={2}>
-        {product.remainingLabel}
-      </AppText>
+      <View style={styles.time}>
+        <AppText variant="label" color={color} numberOfLines={1}>{product.remainingLabel}</AppText>
+        <AppText variant="caption" color={colors.textSecondary} numberOfLines={1}>{product.storageCondition ?? product.openedAtLabel}</AppText>
+      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  table: { flex: 1, minHeight: 120, borderWidth: 1, borderRadius: radii.card, overflow: "hidden" },
-  header: { minHeight: 36, paddingHorizontal: spacing.xs, flexDirection: "row", alignItems: "center", borderBottomWidth: 1 },
-  list: { flex: 1 },
-  row: { minHeight: sizes.touch + spacing.md, paddingHorizontal: spacing.xs, flexDirection: "row", alignItems: "center", borderBottomWidth: 1 },
+  table: { flex: 1, minHeight: 120 },
+  header: { minHeight: 42, flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
+  headingCopy: { gap: 1 },
+  count: { minWidth: 28, minHeight: 24, borderRadius: radii.pill, alignItems: "center", justifyContent: "center", paddingHorizontal: spacing.xs },
+  list: { gap: spacing.xs, paddingBottom: spacing.md },
+  row: { minHeight: 78, paddingHorizontal: spacing.sm, flexDirection: "row", alignItems: "center", borderWidth: 1, borderRadius: radii.control },
   identity: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: spacing.xs },
   productIcon: { width: 34, height: 34, borderRadius: radii.small, alignItems: "center", justifyContent: "center" },
   productText: { flex: 1, minWidth: 0 },
-  status: { width: 76, flexDirection: "row", alignItems: "center", gap: spacing.xxs },
-  time: { width: 82, textAlign: "right" },
+  status: { width: 74, alignItems: "center" },
+  statusPill: { borderRadius: radii.pill, paddingHorizontal: 6, paddingVertical: 4, flexDirection: "row", alignItems: "center", gap: 3 },
+  time: { width: 88, gap: 2, alignItems: "flex-end" },
 });

@@ -5,17 +5,13 @@
 OpenBy helps users track products after opening them and know how long
 they remain usable.
 
-Opened products are stored locally in SQLite on the mobile device.
+Opened products are stored locally in SQLite on the mobile device and synchronized to the API when the user has an account and internet connection.
 
 The public backend catalog is currently queried only by barcode.
-Users cannot browse or filter the backend product catalog.
 
 If a barcode is unknown, the user may submit a request to add the
 product. The request flow uses the public brand search to select an
 existing brand.
-
-User accounts and server-side synchronization of personal inventories
-are future features and are not yet designed.
 
 ## Domain rules
 

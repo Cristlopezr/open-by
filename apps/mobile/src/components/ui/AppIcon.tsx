@@ -26,7 +26,16 @@ export type AppIconName =
   | "info"
   | "search"
   | "food"
-  | "leaf";
+  | "leaf"
+  | "account"
+  | "cloud"
+  | "mail"
+  | "lock"
+  | "google"
+  | "sync"
+  | "logout"
+  | "forward"
+  | "add";
 
 const icons: Record<
   AppIconName,
@@ -61,6 +70,15 @@ const icons: Record<
   search: { ios: "magnifyingglass", android: "search", web: "search" },
   food: { ios: "fork.knife", android: "restaurant", web: "restaurant" },
   leaf: { ios: "leaf.fill", android: "spa", web: "spa" },
+  account: { ios: "person.crop.circle.fill", android: "account_circle", web: "account_circle" },
+  cloud: { ios: "cloud.fill", android: "cloud", web: "cloud" },
+  mail: { ios: "envelope.fill", android: "mail", web: "mail" },
+  lock: { ios: "lock.fill", android: "lock", web: "lock" },
+  google: { ios: "g.circle.fill", android: "g_mobiledata", web: "g_mobiledata" },
+  sync: { ios: "arrow.triangle.2.circlepath", android: "sync", web: "sync" },
+  logout: { ios: "rectangle.portrait.and.arrow.right", android: "logout", web: "logout" },
+  forward: { ios: "chevron.right", android: "chevron_right", web: "chevron_right" },
+  add: { ios: "plus", android: "add", web: "add" },
 };
 
 interface AppIconProps {

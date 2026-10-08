@@ -8,7 +8,7 @@ import { homeProducts, products } from "@/features/mvp-visual/fixtures";
 import type { DetailsPreviewState } from "@/features/mvp-visual/types";
 import { sizes, spacing } from "@/theme/tokens";
 
-export default function ProductDetailsScreen() {
+export function ProductDetailsScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id?: string }>();
   const product = homeProducts.find((entry) => entry.id === id) ?? products[0];

@@ -17,6 +17,12 @@ export const visualRoutes = {
   productDetails: "/product-details",
   reportUnknown: "/report-unknown",
   preferences: "/preferences",
+  signIn: "/sign-in",
+  signUp: "/sign-up",
+  verifyEmail: "/verify-email",
+  resetPassword: "/reset-password",
+  newPassword: "/new-password",
+  account: "/account",
 } as const;
 
 export function usePreviewState<T extends string>(initial: T) {

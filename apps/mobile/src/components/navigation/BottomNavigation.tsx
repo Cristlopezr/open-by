@@ -1,49 +1,127 @@
-import { useRouter } from "expo-router";
+import { Link } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 import { visualRoutes } from "@/features/mvp-visual/state";
 import { useVisualTheme } from "@/theme/ThemeProvider";
-import { radii, shadows, sizes, spacing } from "@/theme/tokens";
-import { AppIcon } from "@/components/ui/AppIcon";
+import { AppIcon, type AppIconName } from "@/components/ui/AppIcon";
 import { AppText } from "@/components/ui/VisualPrimitives";
 
-export function BottomNavigation({ active }: { active: "home" | "preferences" }) {
-  const router = useRouter();
-  const insets = useSafeAreaInsets();
+export function BottomNavigation({
+  active,
+}: {
+  active: "home" | "preferences";
+}) {
+  const { bottom } = useSafeAreaInsets();
   const { colors } = useVisualTheme();
-
+  const items: {
+    label: string;
+    icon: AppIconName;
+    route: (typeof visualRoutes)[keyof typeof visualRoutes];
+    selected?: boolean;
+  }[] = [
+      {
+        label: "Inventory",
+        icon: "product",
+        route: "/",
+        selected: active === "home",
+      },
+      { label: "Scanner", icon: "scan", route: "/scanner" },
+      {
+        label: "Settings",
+        icon: "preferences",
+        route: "/preferences",
+        selected: active === "preferences",
+      },
+    ];
   return (
-    <View style={[styles.bar, shadows.card, { paddingBottom: Math.max(insets.bottom, spacing.xs), backgroundColor: colors.surface, borderColor: colors.border }]}>
-      <NavItem label="Home" icon="home" active={active === "home"} onPress={() => router.replace(visualRoutes.home)} />
-      <Pressable accessibilityRole="button" accessibilityLabel="Scan" onPress={() => router.push(visualRoutes.scanner)} style={[styles.scan, { backgroundColor: colors.primary }]}>
-        <AppIcon name="scan" color={colors.surface} size={27} />
-        <AppText variant="caption" color={colors.surface}>Scan</AppText>
-      </Pressable>
-      <NavItem label="Preferences" icon="preferences" active={active === "preferences"} onPress={() => router.replace(visualRoutes.preferences)} />
+    <View
+      style={[
+        styles.bar,
+        {
+          backgroundColor: colors.background,
+          borderColor: colors.border,
+          paddingBottom: Math.max(bottom, 8),
+        },
+      ]}
+    >
+      {items.map((item) => {
+        if (item.icon === "scan") {
+          return (
+            <View key={item.label} style={styles.scanSlot}>
+              <Link href={item.route} asChild>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Scan"
+                  style={StyleSheet.flatten([
+                    styles.scan,
+                    { backgroundColor: colors.primary },
+                  ])}
+                >
+                  <AppIcon name="scan" color={colors.onPrimary} size={27} />
+                  <AppText
+                    variant="caption"
+                    color={colors.onPrimary}
+                    style={styles.scanLabel}
+                  >
+                    Scan
+                  </AppText>
+                </Pressable>
+              </Link>
+            </View>
+          );
+        }
+        const button = <Pressable
+          accessibilityRole="button"
+          accessibilityState={{ selected: item.selected }}
+          key={item.label}
+          style={styles.item}
+        >
+          <View style={styles.iconWrap}>
+            <AppIcon
+              name={item.icon}
+              color={item.selected ? colors.primary : colors.textSecondary}
+              size={23}
+            />
+          </View>
+          <AppText
+            variant="caption"
+            color={item.selected ? colors.primary : colors.textSecondary}
+            style={styles.label}
+          >
+            {item.label}
+          </AppText>
+        </Pressable>;
+        return item.selected ? button : <Link key={item.label} href={item.route} asChild>{button}</Link>;
+      })}
     </View>
   );
 }
-
-function NavItem({ label, icon, active, onPress }: { label: string; icon: "home" | "preferences"; active: boolean; onPress: () => void }) {
-  const { colors } = useVisualTheme();
-  const color = active ? colors.primary : colors.textSecondary;
-  return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityState={{ selected: active, disabled: active }}
-      disabled={active}
-      onPress={onPress}
-      style={styles.item}
-    >
-      <AppIcon name={icon} color={color} />
-      <AppText variant="caption" color={color}>{label}</AppText>
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
-  bar: { minHeight: sizes.bottomNav, borderTopWidth: 1, paddingHorizontal: spacing.lg, paddingTop: spacing.xs, flexDirection: "row", alignItems: "flex-end", justifyContent: "space-around" },
-  item: { minWidth: 92, minHeight: sizes.touch, alignItems: "center", justifyContent: "center", gap: 2 },
-  scan: { width: 68, height: 68, borderRadius: radii.pill, alignItems: "center", justifyContent: "center", gap: 1, marginTop: -28 },
+  bar: {
+    borderTopWidth: 1,
+    paddingTop: 8,
+    paddingHorizontal: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    minHeight: 68,
+  },
+  item: { flex: 1, minHeight: 48, alignItems: "center", gap: 3 },
+  scanSlot: { flex: 1, alignItems: "center" },
+  scan: {
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 1,
+    marginTop: -20,
+  },
+  scanLabel: { fontSize: 12, lineHeight: 16 },
+  iconWrap: {
+    width: 32,
+    height: 28,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  label: { fontSize: 10, lineHeight: 14 },
 });

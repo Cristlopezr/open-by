@@ -43,14 +43,7 @@ function AppStack() {
           animation: "slide_from_right",
           contentStyle: { backgroundColor: colors.background },
         }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="scanner" options={{ animation: "fade" }} />
-        <Stack.Screen name="confirm-opening" />
-        <Stack.Screen name="product-details" />
-        <Stack.Screen name="report-unknown" />
-        <Stack.Screen name="preferences" />
-      </Stack>
+      />
     </ThemeProvider>
   );
 }

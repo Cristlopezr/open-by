@@ -109,11 +109,11 @@ export function PrimaryButton({ label, onPress, icon, loading, style }: ButtonPr
       ]}
     >
       {loading ? (
-        <ActivityIndicator color={colors.surface} />
+        <ActivityIndicator color={colors.onPrimary} />
       ) : (
         <>
-          {icon ? <AppIcon name={icon} color={colors.surface} size={20} /> : null}
-          <AppText variant="label" color={colors.surface} style={styles.buttonText}>
+          {icon ? <AppIcon name={icon} color={colors.onPrimary} size={20} /> : null}
+          <AppText variant="label" color={colors.onPrimary} style={styles.buttonText}>
             {label}
           </AppText>
         </>
@@ -268,7 +268,7 @@ export function ConfirmationPanel({
 
 const styles = StyleSheet.create({
   fill: { flex: 1 },
-  screenContent: { paddingHorizontal: sizes.horizontalMargin, paddingTop: spacing.md, paddingBottom: 112, gap: spacing.md },
+  screenContent: { paddingHorizontal: sizes.horizontalMargin, paddingTop: spacing.xs, paddingBottom: 40, gap: spacing.md },
   card: { borderRadius: radii.card, padding: spacing.md },
   primaryButton: { minHeight: sizes.primaryAction, borderRadius: radii.control, paddingHorizontal: spacing.lg, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: spacing.xs },
   secondaryButton: { minHeight: sizes.touch, borderRadius: radii.control, borderWidth: 1, paddingHorizontal: spacing.lg, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: spacing.xs },
