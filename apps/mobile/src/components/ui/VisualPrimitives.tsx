@@ -261,7 +261,7 @@ export function ConfirmationPanel({
       <AppText variant="heading" style={styles.center}>{title}</AppText>
       <AppText color={colors.textSecondary} style={styles.center}>{message}</AppText>
       <PrimaryButton label={confirmLabel} onPress={onConfirm} />
-      <SecondaryButton label="Cancel" onPress={onCancel} />
+      <SecondaryButton label="Cancelar" onPress={onCancel} />
     </Card>
   );
 }

@@ -49,7 +49,7 @@ export function HomeScreen() {
       <Screen contentStyle={styles.content}>
         <PageHeader
           title="OpenBy"
-          subtitle="Your opened products"
+          subtitle="Tus productos abiertos"
           accountHref={visualRoutes.account}
         />
         <View style={styles.heading}>
@@ -59,16 +59,16 @@ export function HomeScreen() {
               color={colors.primary}
               style={styles.eyebrow}
             >
-              LESS WASTE, MORE PEACE OF MIND
+              MENOS DESPERDICIO, MÁS TRANQUILIDAD
             </AppText>
-            <AppText variant="title">Freshness hub</AppText>
+            <AppText variant="title">Tus productos</AppText>
           </View>
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={
               isDark
-                ? "Switch to light appearance"
-                : "Switch to dark appearance"
+                ? "Cambiar a modo claro"
+                : "Cambiar a modo oscuro"
             }
             onPress={() => setChoice(isDark ? "light" : "dark")}
             style={[styles.theme, { backgroundColor: colors.surfaceSecondary }]}
@@ -84,8 +84,8 @@ export function HomeScreen() {
         <View style={[styles.search, { backgroundColor: colors.surface }]}>
           <AppIcon name="search" color={colors.textSecondary} size={19} />
           <TextInput
-            accessibilityLabel="Search inventory"
-            placeholder="Search product, brand or barcode"
+            accessibilityLabel="Buscar en el inventario"
+            placeholder="Buscar producto, marca o código de barras"
             placeholderTextColor={colors.textSecondary}
             value={query}
             onChangeText={setQuery}
@@ -94,7 +94,7 @@ export function HomeScreen() {
           <Link href={visualRoutes.scanner} asChild>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Scan barcode"
+              accessibilityLabel="Escanear código de barras"
             >
               <AppIcon name="scan" color={colors.primary} size={20} />
             </Pressable>
@@ -108,15 +108,15 @@ export function HomeScreen() {
           {categories.map((value) => (
             <ChoiceChip
               key={value}
-              label={value === "All" ? `All · ${homeProducts.length}` : value}
+              label={value === "All" ? `Todos · ${homeProducts.length}` : value}
               selected={value === category}
               onPress={() => setCategory(value)}
             />
           ))}
         </ScrollView>
         <View style={styles.listHeader}>
-          <AppText variant="heading">
-            Tracked items{" "}
+          <AppText variant="heading" style={styles.listTitle}>
+            Productos registrados{" "}
             <AppText variant="caption" color={colors.textSecondary}>
               ({results.length})
             </AppText>
@@ -128,8 +128,8 @@ export function HomeScreen() {
             ]}
           >
             {[
-              { label: "Compact", showsCards: false },
-              { label: "Cards", showsCards: true },
+              { label: "Compacta", showsCards: false },
+              { label: "Tarjetas", showsCards: true },
             ].map((option) => (
               <Pressable
                 key={option.label}
@@ -155,7 +155,7 @@ export function HomeScreen() {
         </View>
         {urgent.length ? (
           <InventoryGroup
-            label="Needs attention"
+            label="Requieren atención"
             color={colors.expired}
             products={urgent}
             cards={cards}
@@ -163,7 +163,7 @@ export function HomeScreen() {
         ) : null}
         {other.length ? (
           <InventoryGroup
-            label="Fresh & tracked"
+            label="Vigentes"
             color={colors.primary}
             products={other}
             cards={cards}
@@ -172,8 +172,8 @@ export function HomeScreen() {
         {!results.length ? (
           <StateNotice
             tone="neutral"
-            title="No matching products"
-            message="Try a different name, brand or category."
+            title="No se encontraron productos"
+            message="Prueba con otro nombre, marca o categoría."
           />
         ) : null}
         <View
@@ -181,10 +181,10 @@ export function HomeScreen() {
         >
           <AppIcon name="shield" color={colors.primary} size={24} />
           <View style={styles.flex}>
-            <AppText variant="label">A little care goes a long way</AppText>
+            <AppText variant="label">Cuida tus productos por más tiempo</AppText>
             <AppText variant="caption" color={colors.textSecondary}>
-              Dates are estimated from verified opening rules. Always follow the
-              product’s storage instructions.
+              Las fechas se estiman según reglas de apertura verificadas. Sigue
+              siempre las instrucciones de conservación del producto.
             </AppText>
           </View>
         </View>
@@ -219,10 +219,12 @@ const styles = StyleSheet.create({
   chips: { gap: 8 },
   listHeader: {
     flexDirection: "row",
+    flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 8,
   },
+  listTitle: { flexShrink: 1, minWidth: 0 },
   viewToggle: { flexDirection: "row", borderRadius: 8, padding: 3 },
   viewOption: { paddingHorizontal: 9, paddingVertical: 6, borderRadius: 6 },
   tip: {

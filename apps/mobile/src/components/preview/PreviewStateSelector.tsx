@@ -25,8 +25,8 @@ export function PreviewStateSelector<T extends string>({
   return (
     <View style={[styles.container, { backgroundColor: inverse ? "rgba(16,23,19,0.9)" : colors.surface, borderColor: inverse ? "rgba(255,255,255,0.2)" : colors.border }]}>
       <View style={styles.header}>
-        <AppText variant="caption" color={inverse ? "#FFFFFF" : colors.textSecondary}>Visual preview</AppText>
-        <IconButton icon="close" label="Hide preview controls" onPress={() => setDismissed(true)} inverse={inverse} />
+        <AppText variant="caption" color={inverse ? "#FFFFFF" : colors.textSecondary}>Vista previa</AppText>
+        <IconButton icon="close" label="Ocultar controles de vista previa" onPress={() => setDismissed(true)} inverse={inverse} />
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.options}>
         {options.map((option) => {

@@ -19,7 +19,7 @@ export function NewPasswordScreen() {
 
   const save = () => {
     if (password.length < 8 || password !== confirmation) {
-      setError("Use at least 8 characters and make sure both passwords match.");
+      setError("Usa al menos 8 caracteres y asegúrate de que ambas contraseñas coincidan.");
       return;
     }
     setSent(true);
@@ -28,40 +28,40 @@ export function NewPasswordScreen() {
   return (
     <Screen>
       <View style={s.content}>
-        <PageHeader title="Account recovery" onBack={() => router.back()} />
+        <PageHeader title="Recuperar cuenta" onBack={() => router.back()} />
         <AuthMessageHero icon="lock" />
-        <AppText variant="title">Choose a new password</AppText>
-        <AppText color={colors.textSecondary}>Make it something only you know.</AppText>
+        <AppText variant="title">Elige una nueva contraseña</AppText>
+        <AppText color={colors.textSecondary}>Elige una que solo tú conozcas.</AppText>
         {sent ? (
           <>
             <StateNotice
               tone="success"
-              title="Password updated"
-              message="You can now sign in with your new password."
+              title="Contraseña actualizada"
+              message="Ya puedes iniciar sesión con tu nueva contraseña."
             />
             <PrimaryButton
-              label="Back to sign in"
+              label="Volver a iniciar sesión"
               onPress={() => router.replace(visualRoutes.signIn)}
             />
           </>
         ) : (
           <Card style={s.form}>
             <InputField
-              label="New password"
-              placeholder="At least 8 characters"
+              label="Nueva contraseña"
+              placeholder="Al menos 8 caracteres"
               secureTextEntry
               value={password}
               onChangeText={setPassword}
             />
             <InputField
-              label="Confirm password"
-              placeholder="Repeat your new password"
+              label="Confirmar contraseña"
+              placeholder="Repite tu nueva contraseña"
               secureTextEntry
               value={confirmation}
               onChangeText={setConfirmation}
             />
             {error ? <AppText variant="caption" color={colors.expired}>{error}</AppText> : null}
-            <PrimaryButton label="Save new password" onPress={save} />
+            <PrimaryButton label="Guardar nueva contraseña" onPress={save} />
           </Card>
         )}
       </View>

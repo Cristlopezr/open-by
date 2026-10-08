@@ -7,10 +7,10 @@ import { AppIcon, type AppIconName } from "@/components/ui/AppIcon";
 import { AppText, Card, Pill } from "@/components/ui/VisualPrimitives";
 
 const statusMeta: Record<ProductFixture["status"], { label: string; icon: AppIconName }> = {
-  fresh: { label: "Fresh", icon: "leaf" },
-  soon: { label: "Use soon", icon: "warning" },
-  expired: { label: "Expired", icon: "error" },
-  unknown: { label: "Lifetime unknown", icon: "info" },
+  fresh: { label: "Vigente", icon: "leaf" },
+  soon: { label: "Usar pronto", icon: "warning" },
+  expired: { label: "Vencido", icon: "error" },
+  unknown: { label: "Duración desconocida", icon: "info" },
 };
 
 export function ProductCard({ product, onPress }: { product: ProductFixture; onPress?: () => void }) {
@@ -30,8 +30,8 @@ export function ProductCard({ product, onPress }: { product: ProductFixture; onP
             <View style={styles.copy}>
               <View style={styles.nameRow}>
                 <View style={styles.nameCopy}>
-                  <AppText variant="bodyMedium" numberOfLines={2}>{product.name || "Unnamed product"}</AppText>
-                  <AppText variant="caption" color={colors.textSecondary} numberOfLines={1}>{product.brand || "Brand unavailable"}</AppText>
+                  <AppText variant="bodyMedium" numberOfLines={2}>{product.name || "Producto sin nombre"}</AppText>
+                  <AppText variant="caption" color={colors.textSecondary} numberOfLines={1}>{product.brand || "Marca no disponible"}</AppText>
                 </View>
                 <Pill label={meta.label} color={statusColor} icon={meta.icon} />
               </View>
@@ -39,7 +39,7 @@ export function ProductCard({ product, onPress }: { product: ProductFixture; onP
               <View style={styles.metaRow}>
                 <View style={styles.metaItem}>
                   <AppIcon name="clock" color={colors.textSecondary} size={15} />
-                  <AppText variant="caption" color={colors.textSecondary}>{product.expirationLabel ?? "No expiration date"}</AppText>
+                  <AppText variant="caption" color={colors.textSecondary}>{product.expirationLabel ?? "Sin fecha de vencimiento"}</AppText>
                 </View>
                 <View style={styles.metaItem}>
                   <AppIcon name="notification" color={colors.textSecondary} size={15} />

@@ -16,10 +16,10 @@ export function EmptyInventoryState({ onScan }: { onScan: () => void }) {
         </View>
       </View>
       <View style={styles.copy}>
-        <AppText variant="heading" style={styles.center}>You have no opened products yet</AppText>
-        <AppText color={colors.textSecondary} style={styles.center}>Scan a barcode when you open something and OpenBy will keep it easy to find.</AppText>
+        <AppText variant="heading" style={styles.center}>Aún no tienes productos abiertos</AppText>
+        <AppText color={colors.textSecondary} style={styles.center}>Escanea el código de barras al abrir un producto para encontrarlo fácilmente en OpenBy.</AppText>
       </View>
-      <PrimaryButton label="Scan my first product" icon="scan" onPress={onScan} style={styles.button} />
+      <PrimaryButton label="Escanear mi primer producto" icon="scan" onPress={onScan} style={styles.button} />
     </View>
   );
 }

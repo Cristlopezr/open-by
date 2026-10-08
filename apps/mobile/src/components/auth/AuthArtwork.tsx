@@ -15,12 +15,12 @@ export function AccessArtwork() {
       <View style={[s.previewCard, s.previewLeft, { backgroundColor: colors.surface }]}>
         <ProductArtwork product={products[0]} size={54} />
         <AppText variant="caption">{products[0].name}</AppText>
-        <Pill label="18 hours left" color={colors.soon} />
+        <Pill label="Quedan 18 horas" color={colors.soon} />
       </View>
       <View style={[s.previewCard, s.previewRight, { backgroundColor: colors.surface }]}>
         <ProductArtwork product={products[2]} size={54} />
         <AppText variant="caption">{products[2].name}</AppText>
-        <Pill label="Fresh & active" color={colors.primary} />
+        <Pill label="Vigente" color={colors.primary} />
       </View>
       <View style={[s.cloudBubble, { backgroundColor: colors.primary }]}>
         <AppIcon name="cloud" color={colors.onPrimary} size={36} />

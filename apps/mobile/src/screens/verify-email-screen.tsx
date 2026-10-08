@@ -16,28 +16,28 @@ export function VerifyEmailScreen() {
   return (
     <Screen>
       <View style={s.content}>
-        <PageHeader title="Email verification" onBack={() => router.back()} />
+        <PageHeader title="Verificar correo" onBack={() => router.back()} />
         <AuthMessageHero icon="mail" />
         <AppText variant="title" style={s.center}>
-          Check your inbox
+          Revisa tu correo
         </AppText>
         <AppText color={colors.textSecondary} style={s.center}>
-          Open the verification link in your email to finish creating your
-          account.
+          Abre el enlace de verificación que te enviamos para terminar de crear
+          tu cuenta.
         </AppText>
         <Card style={s.form}>
-          <Pill label="Verification pending" color={colors.soon} icon="clock" />
-          <AppText variant="bodyMedium">One last step to get started</AppText>
+          <Pill label="Verificación pendiente" color={colors.soon} icon="clock" />
+          <AppText variant="bodyMedium">Solo falta un paso para comenzar</AppText>
           <AppText color={colors.textSecondary}>
-            You can sign in after your email has been verified.
+            Podrás iniciar sesión cuando se verifique tu correo.
           </AppText>
           <PrimaryButton
-            label="I've verified my email"
+            label="Ya verifiqué mi correo"
             icon="success"
             onPress={() => router.replace(visualRoutes.signIn)}
           />
           <SecondaryButton
-            label="Resend verification link"
+            label="Reenviar enlace de verificación"
             icon="mail"
             onPress={() => setResent(true)}
           />
@@ -45,13 +45,11 @@ export function VerifyEmailScreen() {
         {resent ? (
           <StateNotice
             tone="success"
-            title="Link sent again"
-            message="Check your inbox and spam folder."
+            title="Enlace reenviado"
+            message="Revisa tu correo y la carpeta de correo no deseado."
           />
         ) : null}
       </View>
     </Screen>
   );
 }
-
-

@@ -30,15 +30,15 @@ export function UnknownProductForm({
   return (
     <View style={s.content}>
       <View>
-        <AppText variant="title">A new find?</AppText>
+        <AppText variant="title">¿Encontraste un producto nuevo?</AppText>
         <AppText color={colors.textSecondary}>
-          Help us add this product to the shared catalog.
+            Ayúdanos a agregarlo al catálogo compartido.
         </AppText>
       </View>
       <View style={[s.barcode, { backgroundColor: colors.warningSoft }]}>
         <AppIcon name="scan" color={colors.soon} />
         <View style={s.flex}>
-          <AppText variant="label">Barcode not found</AppText>
+          <AppText variant="label">Código de barras no encontrado</AppText>
           <AppText variant="caption" color={colors.soon}>
             {barcode}
           </AppText>
@@ -51,17 +51,17 @@ export function UnknownProductForm({
               01
             </AppText>
           </View>
-          <AppText variant="heading">Product information</AppText>
+          <AppText variant="heading">Información del producto</AppText>
         </View>
         <InputField
-          label="Product name"
-          placeholder="e.g. Roasted red pepper spread"
-          defaultValue="Roasted red pepper spread"
+          label="Nombre del producto"
+          placeholder="Ej.: pasta de pimentón asado"
+          defaultValue="Pasta de pimentón asado"
           icon="product"
         />
         <InputField
-          label="Quantity / package size"
-          placeholder="e.g. 280 g"
+          label="Cantidad / tamaño del envase"
+          placeholder="Ej.: 280 g"
           defaultValue="280 g"
         />
       </Card>
@@ -72,11 +72,11 @@ export function UnknownProductForm({
               02
             </AppText>
           </View>
-          <AppText variant="heading">Choose an existing brand</AppText>
+          <AppText variant="heading">Elige una marca existente</AppText>
         </View>
         <InputField
-          label="Search brands"
-          placeholder="Search by name"
+          label="Buscar marcas"
+          placeholder="Buscar por nombre"
           icon="search"
           value={search}
           onChangeText={setSearch}
@@ -98,33 +98,33 @@ export function UnknownProductForm({
             ))}
         </ScrollView>
         <AppText variant="caption" color={colors.textSecondary}>
-          Catalog brands are managed by the OpenBy team.
+            Las marcas del catálogo son administradas por el equipo de OpenBy.
         </AppText>
       </Card>
       <StateNotice
         tone="info"
-        title="Reviewed before publication"
-        message="A product appears in the public catalog only after its opening rule is verified."
+        title="Revisión antes de publicar"
+        message="El producto aparecerá en el catálogo público cuando se verifique su regla de apertura."
       />
       {state === "submitted" ? (
         <StateNotice
           tone="success"
-          title="Request received"
-          message="Your product is pending catalog review."
+          title="Solicitud recibida"
+          message="Tu producto está pendiente de revisión."
         />
       ) : null}
       <PrimaryButton
         label={
           state === "submitted"
-            ? "Back to inventory"
+            ? "Volver al inventario"
             : state === "submitting"
-              ? "Confirm request"
-              : "Submit product request"
+              ? "Confirmar solicitud"
+              : "Enviar solicitud de producto"
         }
         icon="success"
         onPress={onSubmit}
       />
-      <SecondaryButton label="Cancel" onPress={onCancel} />
+      <SecondaryButton label="Cancelar" onPress={onCancel} />
     </View>
   );
 }

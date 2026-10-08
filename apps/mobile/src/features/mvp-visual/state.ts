@@ -30,46 +30,46 @@ export function usePreviewState<T extends string>(initial: T) {
 }
 
 export const homeOptions: PreviewOption<HomePreviewState>[] = [
-  { value: "mixed", label: "Inventory" },
-  { value: "empty", label: "Empty" },
-  { value: "edge", label: "Long text" },
+  { value: "mixed", label: "Inventario" },
+  { value: "empty", label: "Vacío" },
+  { value: "edge", label: "Texto largo" },
 ];
 
 export const scannerOptions: PreviewOption<ScannerPreviewState>[] = [
-  { value: "ready", label: "Ready" },
-  { value: "loading", label: "Loading" },
-  { value: "success", label: "Success" },
-  { value: "cameraDenied", label: "Camera denied" },
-  { value: "unreadable", label: "Unreadable" },
-  { value: "offline", label: "No connection" },
-  { value: "lookupFailure", label: "Lookup error" },
-  { value: "unknownBarcode", label: "Unknown" },
+  { value: "ready", label: "Listo" },
+  { value: "loading", label: "Cargando" },
+  { value: "success", label: "Encontrado" },
+  { value: "cameraDenied", label: "Cámara denegada" },
+  { value: "unreadable", label: "No se pudo leer" },
+  { value: "offline", label: "Sin conexión" },
+  { value: "lookupFailure", label: "Error de búsqueda" },
+  { value: "unknownBarcode", label: "Desconocido" },
 ];
 
 export const confirmOptions: PreviewOption<ConfirmPreviewState>[] = [
-  { value: "known", label: "Known lifetime" },
-  { value: "unknown", label: "Unknown lifetime" },
-  { value: "adding", label: "Adding" },
-  { value: "added", label: "Added" },
-  { value: "discard", label: "Discard" },
+  { value: "known", label: "Duración conocida" },
+  { value: "unknown", label: "Duración desconocida" },
+  { value: "adding", label: "Agregando" },
+  { value: "added", label: "Agregado" },
+  { value: "discard", label: "Descartar" },
 ];
 
 export const detailsOptions: PreviewOption<DetailsPreviewState>[] = [
-  { value: "fresh", label: "Fresh" },
-  { value: "soon", label: "Soon" },
-  { value: "expired", label: "Expired" },
-  { value: "unknown", label: "Unknown" },
-  { value: "delete", label: "Delete" },
-  { value: "discard", label: "Discard" },
+  { value: "fresh", label: "Vigente" },
+  { value: "soon", label: "Por vencer" },
+  { value: "expired", label: "Vencido" },
+  { value: "unknown", label: "Desconocido" },
+  { value: "delete", label: "Eliminar" },
+  { value: "discard", label: "Descartar" },
 ];
 
 export const reportOptions: PreviewOption<ReportPreviewState>[] = [
-  { value: "ready", label: "Ready" },
-  { value: "submitting", label: "Submitting" },
-  { value: "submitted", label: "Submitted" },
+  { value: "ready", label: "Listo" },
+  { value: "submitting", label: "Enviando" },
+  { value: "submitted", label: "Enviado" },
 ];
 
 export const preferencesOptions: PreviewOption<PreferencesPreviewState>[] = [
-  { value: "default", label: "Default" },
-  { value: "notificationsDenied", label: "Notifications denied" },
+  { value: "default", label: "Predeterminado" },
+  { value: "notificationsDenied", label: "Notificaciones denegadas" },
 ];

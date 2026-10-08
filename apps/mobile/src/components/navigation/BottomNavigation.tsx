@@ -20,14 +20,14 @@ export function BottomNavigation({
     selected?: boolean;
   }[] = [
       {
-        label: "Inventory",
+        label: "Inventario",
         icon: "product",
         route: "/",
         selected: active === "home",
       },
-      { label: "Scanner", icon: "scan", route: "/scanner" },
+      { label: "Escanear", icon: "scan", route: "/scanner" },
       {
-        label: "Settings",
+        label: "Configuración",
         icon: "preferences",
         route: "/preferences",
         selected: active === "preferences",
@@ -51,7 +51,7 @@ export function BottomNavigation({
               <Link href={item.route} asChild>
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel="Scan"
+                  accessibilityLabel="Escanear"
                   style={StyleSheet.flatten([
                     styles.scan,
                     { backgroundColor: colors.primary },
@@ -63,7 +63,7 @@ export function BottomNavigation({
                     color={colors.onPrimary}
                     style={styles.scanLabel}
                   >
-                    Scan
+                    Escanear
                   </AppText>
                 </Pressable>
               </Link>

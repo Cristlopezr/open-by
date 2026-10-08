@@ -20,8 +20,8 @@ export function ReportUnknownScreen() {
   return (
     <Screen>
       <View style={styles.header}>
-        <IconButton icon="back" label="Back to Scanner" onPress={() => router.back()} />
-        <AppText variant="heading">Report product</AppText>
+        <IconButton icon="back" label="Volver al escáner" onPress={() => router.back()} />
+        <AppText variant="heading">Solicitar producto</AppText>
         <View style={styles.spacer} />
       </View>
       <UnknownProductForm barcode={unknownBarcode} state={state} onSubmit={submit} onCancel={() => router.replace(visualRoutes.home)} />

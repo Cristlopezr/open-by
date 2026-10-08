@@ -17,34 +17,34 @@ export function ResetPasswordScreen() {
   return (
     <Screen>
       <View style={s.content}>
-        <PageHeader title="Account recovery" onBack={() => router.back()} />
+        <PageHeader title="Recuperar cuenta" onBack={() => router.back()} />
         <AuthMessageHero icon="lock" />
-        <AppText variant="title">Forgot your password?</AppText>
+        <AppText variant="title">¿Olvidaste tu contraseña?</AppText>
         <AppText color={colors.textSecondary}>
-          We’ll send a link to help you get back to your inventory.
+          Te enviaremos un enlace para que recuperes el acceso a tu inventario.
         </AppText>
         {sent ? (
           <>
             <StateNotice
               tone="success"
-              title="Check your inbox"
-              message="If an account exists for this email, a recovery link will arrive shortly."
+              title="Revisa tu correo"
+              message="Si existe una cuenta asociada a este correo, recibirás un enlace de recuperación pronto."
             />
             <PrimaryButton
-              label="Continue to new password"
+              label="Continuar para crear una contraseña"
               onPress={() => router.replace(visualRoutes.newPassword)}
             />
           </>
         ) : (
           <Card style={s.form}>
             <InputField
-              label="Email"
-              placeholder="you@example.com"
+              label="Correo electrónico"
+              placeholder="tu@ejemplo.cl"
               icon="mail"
               autoCapitalize="none"
               keyboardType="email-address"
             />
-            <PrimaryButton label="Send recovery link" onPress={() => setSent(true)} />
+            <PrimaryButton label="Enviar enlace de recuperación" onPress={() => setSent(true)} />
           </Card>
         )}
       </View>

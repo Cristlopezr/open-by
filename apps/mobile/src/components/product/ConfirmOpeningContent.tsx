@@ -40,12 +40,12 @@ export function ConfirmOpeningContent({
   const [day, setDay] = useState("Today");
   return (
     <Screen>
-      <PageHeader title="Add to inventory" onBack={onBack} />
+      <PageHeader title="Agregar al inventario" onBack={onBack} />
       <Card style={s.identity}>
         <ProductArtwork product={product} size={80} />
         <View style={s.flex}>
           <Pill
-            label="Verified opening rule"
+            label="Regla de apertura verificada"
             color={colors.primary}
             icon="shield"
           />
@@ -59,21 +59,25 @@ export function ConfirmOpeningContent({
       </Card>
       <View style={[s.lifetime, { backgroundColor: colors.primarySoft }]}>
         <AppText variant="caption" color={colors.primary}>
-          LIFETIME AFTER OPENING
+          DURACIÓN DESPUÉS DE ABRIR
         </AppText>
         <AppText variant="title" color={colors.primary}>
-          {product.lifetimeLabel ?? "Unavailable"}
+          {product.lifetimeLabel ?? "No disponible"}
         </AppText>
         <AppText variant="caption" color={colors.textSecondary}>
           {product.storageCondition}
         </AppText>
       </View>
-      <AppText variant="heading">When did you open it?</AppText>
+      <AppText variant="heading">¿Cuándo lo abriste?</AppText>
       <View style={s.choices}>
-        {["Today", "Yesterday", "Custom"].map((value) => (
+        {[
+          { value: "Today", label: "Hoy" },
+          { value: "Yesterday", label: "Ayer" },
+          { value: "Custom", label: "Otra fecha" },
+        ].map(({ value, label }) => (
           <ChoiceChip
             key={value}
-            label={value}
+            label={label}
             selected={day === value}
             onPress={() => setDay(value)}
           />
@@ -81,7 +85,7 @@ export function ConfirmOpeningContent({
       </View>
       {day === "Custom" ? (
         <InputField
-          label="Opening date"
+          label="Fecha de apertura"
           placeholder="YYYY-MM-DD"
           defaultValue="2026-09-14"
         />
@@ -89,46 +93,46 @@ export function ConfirmOpeningContent({
       <Card style={s.dates}>
         <View style={s.flex}>
           <AppText variant="caption" color={colors.textSecondary}>
-            OPENED
+            ABIERTO
           </AppText>
           <AppText variant="label">
-            {day === "Today" ? product.openedAtLabel : day}
+            {day === "Today" ? product.openedAtLabel : day === "Yesterday" ? "Ayer" : "Otra fecha"}
           </AppText>
         </View>
         <View style={s.flex}>
           <AppText variant="caption" color={colors.textSecondary}>
-            ESTIMATED EXPIRATION
+            VENCIMIENTO ESTIMADO
           </AppText>
           <AppText variant="label">
-            {product.expirationLabel ?? "Unavailable"}
+            {product.expirationLabel ?? "No disponible"}
           </AppText>
         </View>
       </Card>
       {state === "added" ? (
         <StateNotice
           tone="success"
-          title="Added to your inventory"
-          message="You can find the product in your opened items."
+          title="Agregado a tu inventario"
+          message="Puedes encontrarlo entre tus productos abiertos."
         />
       ) : (
         <StateNotice
           tone="neutral"
-          title="Stored on this device"
-          message="Your opened products are available without an account."
+          title="Guardado en este dispositivo"
+          message="Tus productos abiertos están disponibles sin una cuenta."
         />
       )}
       <PrimaryButton
         label={
           state === "added"
-            ? "Back to inventory"
+            ? "Volver al inventario"
             : state === "adding"
-              ? "Confirm opening"
-              : "Save to my inventory"
+              ? "Confirmar apertura"
+              : "Guardar en mi inventario"
         }
         icon="success"
         onPress={state === "added" ? onDone : onAdd}
       />
-      <SecondaryButton label="Cancel" onPress={onCancel} />
+      <SecondaryButton label="Cancelar" onPress={onCancel} />
     </Screen>
   );
 }

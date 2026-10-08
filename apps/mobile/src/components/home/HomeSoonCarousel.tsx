@@ -22,9 +22,9 @@ export function HomeSoonCarousel({
   return (
     <View style={styles.section}>
       <View style={styles.heading}>
-        <AppText variant="heading">Use soon</AppText>
+        <AppText variant="heading">Usar pronto</AppText>
         <AppText variant="caption" color={colors.textSecondary}>
-          {products.length} to keep an eye on
+          {products.length} por revisar
         </AppText>
       </View>
       <ScrollView
@@ -35,7 +35,7 @@ export function HomeSoonCarousel({
         {products.map((product) => (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel={`Open ${product.name || "unnamed product"}, ${product.remainingLabel}`}
+            accessibilityLabel={`Abrir ${product.name || "producto sin nombre"}, ${product.remainingLabel}`}
             key={product.id}
             onPress={() => onSelect(product)}
             style={[
@@ -48,11 +48,11 @@ export function HomeSoonCarousel({
               <View style={styles.status}>
                 <AppIcon name="warning" color={colors.soon} size={15} />
                 <AppText variant="caption" color={colors.soon}>
-                  Use soon
+                  Usar pronto
                 </AppText>
               </View>
               <AppText variant="bodyMedium" numberOfLines={2}>
-                {product.name || "Unnamed product"}
+                {product.name || "Producto sin nombre"}
               </AppText>
               <AppText variant="bodyMedium" color={colors.soon} numberOfLines={2}>
                 {product.remainingLabel}

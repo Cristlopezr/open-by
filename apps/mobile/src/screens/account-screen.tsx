@@ -19,7 +19,7 @@ export function AccountScreen() {
   return (
     <Screen>
       <View style={s.content}>
-        <PageHeader title="Account & sync" onBack={() => router.back()} />
+        <PageHeader title="Cuenta y sincronización" onBack={() => router.back()} />
         <Card style={s.profile}>
           <View style={[s.avatar, { backgroundColor: colors.primarySoft }]}>
             <AppText variant="title" color={colors.primary}>
@@ -31,24 +31,24 @@ export function AccountScreen() {
             <AppText variant="caption" color={colors.textSecondary}>
               jamie@example.com
             </AppText>
-            <Pill label="Email verified" color={colors.primary} icon="shield" />
+            <Pill label="Correo verificado" color={colors.primary} icon="shield" />
           </View>
         </Card>
         <View style={[s.syncHero, { backgroundColor: colors.primary }]}>
           <View style={s.row}>
             <AppIcon name="cloud" color={colors.onPrimary} size={32} />
             <Pill
-              label={connected ? "Connected" : "Offline"}
+              label={connected ? "Conectado" : "Sin conexión"}
               color={colors.onPrimary}
             />
           </View>
           <AppText variant="title" color={colors.onPrimary}>
-            {"Your inventory,\nbacked up."}
+            {"Tu inventario,\nrespaldado."}
           </AppText>
           <AppText color={colors.onPrimary}>
             {sync
-              ? "All opened products are up to date."
-              : "Keep the products you’ve opened with you across devices."}
+              ? "Todos tus productos abiertos están al día."
+              : "Mantén tus productos abiertos disponibles en otros dispositivos."}
           </AppText>
           <View style={s.syncNumbers}>
             <View>
@@ -56,7 +56,7 @@ export function AccountScreen() {
                 {homeProducts.length}
               </AppText>
               <AppText variant="caption" color={colors.onPrimary}>
-                Opened items
+                Productos abiertos
               </AppText>
             </View>
             <View>
@@ -64,43 +64,43 @@ export function AccountScreen() {
                 1
               </AppText>
               <AppText variant="caption" color={colors.onPrimary}>
-                Account
+                Cuenta
               </AppText>
             </View>
           </View>
         </View>
         <SecondaryButton
-          label={sync ? "Inventory up to date" : "Sync inventory"}
+          label={sync ? "Inventario al día" : "Sincronizar inventario"}
           icon="sync"
           onPress={() => setSync(true)}
         />
         <View style={s.row}>
           <ChoiceChip
-            label="Connected"
+            label="Conectado"
             selected={connected}
             onPress={() => setConnected(true)}
           />
           <ChoiceChip
-            label="Offline"
+            label="Sin conexión"
             selected={!connected}
             onPress={() => setConnected(false)}
           />
         </View>
         <Card style={s.form}>
-          <AppText variant="heading">On this device</AppText>
+          <AppText variant="heading">En este dispositivo</AppText>
           <AccountRow
             icon="product"
-            title="Opened products"
-            detail="Product names, opening dates and expiration snapshots"
+            title="Productos abiertos"
+            detail="Nombres, fechas de apertura y vencimientos estimados"
           />
           <AccountRow
             icon="shield"
-            title="Local inventory"
-            detail="Your inventory stays available when you’re offline."
+            title="Inventario local"
+            detail="Tu inventario sigue disponible sin conexión."
           />
         </Card>
         <SecondaryButton
-          label="Sign out"
+          label="Cerrar sesión"
           icon="logout"
           destructive
           onPress={() => router.replace(visualRoutes.signIn)}

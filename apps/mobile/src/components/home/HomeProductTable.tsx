@@ -8,10 +8,10 @@ import { useVisualTheme } from "@/theme/ThemeProvider";
 import { radii, sizes, spacing } from "@/theme/tokens";
 
 const statuses: Record<ExpirationStatus, { label: string; icon: AppIconName }> = {
-  fresh: { label: "Fresh", icon: "leaf" },
-  soon: { label: "Soon", icon: "warning" },
-  expired: { label: "Expired", icon: "error" },
-  unknown: { label: "Unknown", icon: "info" },
+  fresh: { label: "Vigente", icon: "leaf" },
+  soon: { label: "Por vencer", icon: "warning" },
+  expired: { label: "Vencido", icon: "error" },
+  unknown: { label: "Desconocido", icon: "info" },
 };
 
 export function HomeProductTable({
@@ -26,8 +26,8 @@ export function HomeProductTable({
     <View style={styles.table}>
       <View style={styles.header}>
         <View style={styles.headingCopy}>
-          <AppText variant="heading">Tracked items</AppText>
-          <AppText variant="caption" color={colors.textSecondary}>{products.length} visible · sorted by urgency</AppText>
+          <AppText variant="heading">Productos registrados</AppText>
+          <AppText variant="caption" color={colors.textSecondary}>{products.length} visibles · ordenados por urgencia</AppText>
         </View>
         <View style={[styles.count, { backgroundColor: colors.surfaceSecondary }]}><AppText variant="caption" color={colors.textSecondary}>{products.length}</AppText></View>
       </View>
@@ -52,7 +52,7 @@ function ProductRow({ product, onPress }: { product: ProductFixture; onPress: ()
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Open ${product.name || "unnamed product"}, ${status.label}, ${product.remainingLabel}`}
+      accessibilityLabel={`Abrir ${product.name || "producto sin nombre"}, ${status.label}, ${product.remainingLabel}`}
       onPress={onPress}
       style={({ pressed }) => [
         styles.row,
@@ -72,7 +72,7 @@ function ProductRow({ product, onPress }: { product: ProductFixture; onPress: ()
         </View>
         <View style={styles.productText}>
           <AppText variant="bodyMedium" numberOfLines={1}>
-            {product.name || "Unnamed product"}
+            {product.name || "Producto sin nombre"}
           </AppText>
           <AppText variant="caption" color={colors.textSecondary} numberOfLines={1}>
             {product.brand || product.categoryLabel}

@@ -21,8 +21,8 @@ export function ProductDetailsScreen() {
   return (
     <Screen>
       <View style={styles.header}>
-        <IconButton icon="back" label="Back to Home" onPress={() => router.back()} />
-        <AppText variant="heading">Product details</AppText>
+        <IconButton icon="back" label="Volver al inicio" onPress={() => router.back()} />
+        <AppText variant="heading">Detalle del producto</AppText>
         <View style={styles.spacer} />
       </View>
       <ProductDetailsContent

@@ -36,8 +36,8 @@ export function ScannerVisuals({
     >
       <View style={s.header}>
         <PageHeader
-          title="Barcode scanner"
-          subtitle="Find a product in the catalog"
+          title="Escáner de códigos de barras"
+          subtitle="Busca un producto en el catálogo"
           onBack={onClose}
         />
       </View>
@@ -58,13 +58,13 @@ export function ScannerVisuals({
             size={18}
           />
           <AppText variant="caption">
-            {success ? "Product matched" : "Align the barcode inside the frame"}
+            {success ? "Producto encontrado" : "Alinea el código de barras dentro del marco"}
           </AppText>
         </View>
         <View style={s.cameraTools}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Preview barcode match"
+            accessibilityLabel="Vista previa del producto encontrado"
             onPress={onAdvance}
             style={StyleSheet.flatten([s.tool, { backgroundColor: colors.surface }])}
           >
@@ -73,7 +73,7 @@ export function ScannerVisuals({
           <Link href={visualRoutes.reportUnknown} asChild>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Enter an unknown barcode"
+              accessibilityLabel="Ingresar un código de barras desconocido"
               style={StyleSheet.flatten([s.tool, { backgroundColor: colors.surface }])}
             >
               <AppIcon name="edit" color={colors.textSecondary} />
@@ -88,7 +88,7 @@ export function ScannerVisuals({
               <ProductArtwork product={products[0]} size={64} />
               <View style={s.flex}>
                 <Pill
-                  label="Verified catalog match"
+                  label="Producto verificado en el catálogo"
                   color={colors.primary}
                   icon="shield"
                 />
@@ -108,28 +108,28 @@ export function ScannerVisuals({
               </View>
             </View>
             <PrimaryButton
-              label="Set opening date"
+              label="Indicar fecha de apertura"
               icon="success"
               onPress={onAdvance}
             />
           </>
         ) : failure ? (
           <Card>
-            <AppText variant="heading">Couldn’t read this product</AppText>
+            <AppText variant="heading">No pudimos leer este producto</AppText>
             <AppText color={colors.textSecondary}>
-              Try the barcode again, or submit a product request.
+              Intenta escanear el código de nuevo o solicita agregar el producto.
             </AppText>
-            <SecondaryButton label="Try again" onPress={onRetry} />
+            <SecondaryButton label="Intentar de nuevo" onPress={onRetry} />
           </Card>
         ) : (
           <>
-            <AppText variant="heading">Know it. Open it. Track it.</AppText>
+            <AppText variant="heading">Conócelo. Ábrelo. Hazle seguimiento.</AppText>
             <AppText color={colors.textSecondary}>
-              Scan the packaging to find its verified lifetime after opening.
+              Escanea el envase para conocer su duración verificada después de abrir.
             </AppText>
             <PrimaryButton
               label={
-                state === "loading" ? "Show product match" : "Scan barcode"
+                state === "loading" ? "Mostrar producto encontrado" : "Escanear código de barras"
               }
               icon="scan"
               onPress={onAdvance}
@@ -137,7 +137,7 @@ export function ScannerVisuals({
           </>
         )}
         <Link href={visualRoutes.reportUnknown} asChild>
-          <SecondaryButton label="Product not in the catalog?" />
+          <SecondaryButton label="¿El producto no está en el catálogo?" />
         </Link>
       </View>
     </SafeAreaView>

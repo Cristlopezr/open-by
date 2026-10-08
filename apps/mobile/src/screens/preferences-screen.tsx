@@ -21,32 +21,32 @@ export function PreferencesScreen() {
       <Screen contentStyle={s.content}>
         <PageHeader
           title="OpenBy"
-          subtitle="Settings"
+          subtitle="Configuración"
           accountHref={visualRoutes.account}
         />
-        <AppText variant="title">Make it yours.</AppText>
+        <AppText variant="title">A tu manera.</AppText>
         <AppText color={colors.textSecondary}>
-          Your inventory. Your preferences.
+          Tu inventario. Tus preferencias.
         </AppText>
         <View style={[s.accountBanner, { backgroundColor: colors.primary }]}>
           <AppIcon name="cloud" color={colors.onPrimary} size={32} />
           <View style={s.flex}>
             <AppText variant="heading" color={colors.onPrimary}>
-              Keep everything in sync
+              Mantén todo sincronizado
             </AppText>
             <AppText variant="caption" color={colors.onPrimary}>
-              Bring your opened products to another device.
+              Lleva tus productos abiertos a otro dispositivo.
             </AppText>
           </View>
         </View>
         <Link href={visualRoutes.account} asChild>
           <SecondaryButton
-            label="Account & backup"
+            label="Cuenta y respaldo"
             icon="account"
           />
         </Link>
         <AppText variant="caption" color={colors.textSecondary} style={s.label}>
-          YOUR EXPERIENCE
+          TU EXPERIENCIA
         </AppText>
         <Card style={s.section}>
           <View style={s.row}>
@@ -56,9 +56,9 @@ export function PreferencesScreen() {
               <AppIcon name="dark" color={colors.primary} />
             </View>
             <View style={s.flex}>
-              <AppText variant="heading">Appearance</AppText>
+              <AppText variant="heading">Apariencia</AppText>
               <AppText variant="caption" color={colors.textSecondary}>
-                Light, dark or follow your device
+                Claro, oscuro o según tu dispositivo
               </AppText>
             </View>
           </View>
@@ -66,7 +66,7 @@ export function PreferencesScreen() {
             {(["light", "dark", "system"] as const).map((value) => (
               <ChoiceChip
                 key={value}
-                label={value[0].toUpperCase() + value.slice(1)}
+                label={{ light: "Claro", dark: "Oscuro", system: "Sistema" }[value]}
                 selected={choice === value}
                 onPress={() => setChoice(value)}
               />
@@ -81,13 +81,13 @@ export function PreferencesScreen() {
               <AppIcon name="notification" color={colors.primary} />
             </View>
             <View style={s.flex}>
-              <AppText variant="heading">Expiration reminders</AppText>
+              <AppText variant="heading">Recordatorios de vencimiento</AppText>
               <AppText variant="caption" color={colors.textSecondary}>
-                A heads-up before an item expires
+                Recibe un aviso antes de que venza un producto
               </AppText>
             </View>
             <Switch
-              accessibilityLabel="Expiration reminders"
+              accessibilityLabel="Recordatorios de vencimiento"
               value={reminders}
               onValueChange={setReminders}
               trackColor={{
@@ -98,23 +98,23 @@ export function PreferencesScreen() {
           </View>
           <View style={[s.preference, { backgroundColor: colors.surfaceLow }]}>
             <AppText variant="caption" color={colors.textSecondary}>
-              DEFAULT REMINDER
+              RECORDATORIO PREDETERMINADO
             </AppText>
-            <AppText variant="bodyMedium">1 day before expiration</AppText>
+            <AppText variant="bodyMedium">1 día antes del vencimiento</AppText>
           </View>
         </Card>
         <AppText variant="caption" color={colors.textSecondary} style={s.label}>
-          ABOUT YOUR DATA
+          SOBRE TUS DATOS
         </AppText>
         <Card style={s.section}>
           <View style={s.row}>
             <AppIcon name="shield" color={colors.primary} />
-            <AppText variant="heading">Local by default</AppText>
+            <AppText variant="heading">Guardado en tu dispositivo</AppText>
           </View>
           <AppText color={colors.textSecondary}>
-            Without an account, your opened inventory stays on this device. The
-            shared catalog provides public product information and verified
-            opening rules.
+            Sin una cuenta, tu inventario de productos abiertos permanece en este
+            dispositivo. El catálogo compartido ofrece información pública de
+            productos y reglas de apertura verificadas.
           </AppText>
         </Card>
         <View style={s.about}>
@@ -122,7 +122,7 @@ export function PreferencesScreen() {
             OpenBy
           </AppText>
           <AppText variant="caption" color={colors.textSecondary}>
-            A little care. A little less waste. · v1.0.0
+            Un poco de cuidado. Menos desperdicio. · v1.0.0
           </AppText>
         </View>
       </Screen>

@@ -15,9 +15,9 @@ export function InventorySummary({ products }: { products: ProductFixture[] }) {
   };
 
   const items = [
-    { label: "Fresh", count: counts.fresh, color: colors.fresh, icon: "leaf" as const },
-    { label: "Use soon", count: counts.soon, color: colors.soon, icon: "clock" as const },
-    { label: "Expired", count: counts.expired, color: colors.expired, icon: "warning" as const },
+    { label: "Vigentes", count: counts.fresh, color: colors.fresh, icon: "leaf" as const },
+    { label: "Por vencer", count: counts.soon, color: colors.soon, icon: "clock" as const },
+    { label: "Vencidos", count: counts.expired, color: colors.expired, icon: "warning" as const },
   ];
 
   return (

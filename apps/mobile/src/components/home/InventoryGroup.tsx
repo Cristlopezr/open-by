@@ -29,7 +29,7 @@ export function InventoryGroup({
           {label.toUpperCase()} · {products.length}
         </AppText>
         <AppText variant="caption" color={colors.textSecondary}>
-          By expiration
+            Por vencimiento
         </AppText>
       </View>
       <View

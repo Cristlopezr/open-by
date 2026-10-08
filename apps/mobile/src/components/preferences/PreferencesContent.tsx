@@ -7,9 +7,9 @@ import { AppIcon, type AppIconName } from "@/components/ui/AppIcon";
 import { AppText, Card, Pill, StateNotice } from "@/components/ui/VisualPrimitives";
 
 const themeOptions: { value: ThemeChoice; label: string; icon: AppIconName }[] = [
-  { value: "light", label: "Light", icon: "light" },
-  { value: "dark", label: "Dark", icon: "dark" },
-  { value: "system", label: "System", icon: "system" },
+  { value: "light", label: "Claro", icon: "light" },
+  { value: "dark", label: "Oscuro", icon: "dark" },
+  { value: "system", label: "Sistema", icon: "system" },
 ];
 
 export function PreferencesContent({ state, onOpenAccount }: { state: PreferencesPreviewState; onOpenAccount: () => void }) {
@@ -18,29 +18,29 @@ export function PreferencesContent({ state, onOpenAccount }: { state: Preference
 
   return (
     <View style={styles.content}>
-      <PreferenceSection icon="notification" title="Notifications" subtitle="Choose when OpenBy reminds you">
+      <PreferenceSection icon="notification" title="Notificaciones" subtitle="Elige cuándo quieres recibir recordatorios">
         {denied ? (
-          <StateNotice tone="warning" title="Notifications are disabled" message="Enable permission in Settings to receive reminders." actionLabel="Open settings" />
+          <StateNotice tone="warning" title="Las notificaciones están desactivadas" message="Activa el permiso en la configuración para recibir recordatorios." actionLabel="Abrir configuración" />
         ) : (
           <View style={styles.settingRow}>
             <View style={styles.settingCopy}>
-              <AppText variant="label">Permission status</AppText>
-              <AppText color={colors.textSecondary}>Allowed</AppText>
+              <AppText variant="label">Estado del permiso</AppText>
+              <AppText color={colors.textSecondary}>Permitido</AppText>
             </View>
-            <Pill label="On" color={colors.fresh} icon="success" />
+            <Pill label="Activado" color={colors.fresh} icon="success" />
           </View>
         )}
         <View style={[styles.divider, { backgroundColor: colors.border }]} />
         <View style={styles.settingRow}>
           <View style={styles.settingCopy}>
-            <AppText variant="label">Default reminder</AppText>
-            <AppText color={colors.textSecondary}>1 day before expiration</AppText>
+            <AppText variant="label">Recordatorio predeterminado</AppText>
+            <AppText color={colors.textSecondary}>1 día antes del vencimiento</AppText>
           </View>
-          <AppText variant="label" color={colors.primary}>Change</AppText>
+          <AppText variant="label" color={colors.primary}>Cambiar</AppText>
         </View>
       </PreferenceSection>
 
-      <PreferenceSection icon="light" title="Appearance" subtitle="Choose how OpenBy looks">
+      <PreferenceSection icon="light" title="Apariencia" subtitle="Elige cómo se ve OpenBy">
         <View style={styles.themeRow}>
           {themeOptions.map((option) => {
             const selected = choice === option.value;
@@ -64,30 +64,30 @@ export function PreferencesContent({ state, onOpenAccount }: { state: Preference
         </View>
         {choice === "system" ? (
           <AppText variant="caption" color={colors.textSecondary}>
-            Following your device · currently {appearance}
+              Según tu dispositivo · actualmente {appearance === "dark" ? "oscuro" : "claro"}
           </AppText>
         ) : null}
       </PreferenceSection>
 
-      <PreferenceSection icon="shield" title="Data and Privacy" subtitle="Your inventory, your choice">
-        <AppText color={colors.textSecondary}>Without an account, your personal inventory remains on this device and is not sent to the backend.</AppText>
+      <PreferenceSection icon="shield" title="Datos y privacidad" subtitle="Tú decides sobre tu inventario">
+        <AppText color={colors.textSecondary}>Sin una cuenta, tu inventario personal permanece en este dispositivo y no se envía al servidor.</AppText>
       </PreferenceSection>
 
-      <PreferenceSection icon="cloud" title="Account and backup" subtitle="Keep your opened products with you">
+      <PreferenceSection icon="cloud" title="Cuenta y respaldo" subtitle="Lleva tus productos abiertos contigo">
         <View style={styles.settingRow}>
           <View style={styles.settingCopy}>
-            <AppText variant="label">Cloud backup</AppText>
-            <AppText color={colors.textSecondary}>Set up or review account access</AppText>
+            <AppText variant="label">Respaldo en la nube</AppText>
+            <AppText color={colors.textSecondary}>Configura o revisa el acceso a tu cuenta</AppText>
           </View>
           <Pressable accessibilityRole="button" onPress={onOpenAccount}>
-            <AppText variant="label" color={colors.primary}>Open</AppText>
+            <AppText variant="label" color={colors.primary}>Abrir</AppText>
           </Pressable>
         </View>
       </PreferenceSection>
 
-      <PreferenceSection icon="info" title="About OpenBy" subtitle="Simple freshness, less waste">
+      <PreferenceSection icon="info" title="Acerca de OpenBy" subtitle="Productos vigentes, menos desperdicio">
         <View style={styles.settingRow}>
-          <AppText color={colors.textSecondary}>Version</AppText>
+            <AppText color={colors.textSecondary}>Versión</AppText>
           <AppText variant="label">1.0.0</AppText>
         </View>
       </PreferenceSection>

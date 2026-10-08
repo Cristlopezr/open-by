@@ -28,7 +28,7 @@ export function PageHeader({
   return (
     <View style={styles.header}>
       {onBack ? (
-        <IconButton icon="back" label="Go back" onPress={onBack} />
+        <IconButton icon="back" label="Volver" onPress={onBack} />
       ) : (
         <View style={[styles.brand, { backgroundColor: colors.primary }]}>
           <AppIcon name="leaf" color={colors.onPrimary} size={22} />
@@ -44,10 +44,10 @@ export function PageHeader({
       </View>
       {accountHref ? (
         <Link href={accountHref} asChild>
-          <IconButton icon="account" label="Account" />
+          <IconButton icon="account" label="Cuenta" />
         </Link>
       ) : onAccount ? (
-        <IconButton icon="account" label="Account" onPress={onAccount} />
+        <IconButton icon="account" label="Cuenta" onPress={onAccount} />
       ) : null}
     </View>
   );
@@ -65,7 +65,7 @@ export function ProductArtwork({
   const jar = product.categoryIcon === "jar" || product.categoryIcon === "milk";
   return (
     <View
-      accessibilityLabel={product.name ?? "Product"}
+      accessibilityLabel={product.name ?? "Producto"}
       style={[
         styles.artwork,
         { width: size, height: size, backgroundColor: colors.surfaceSecondary },

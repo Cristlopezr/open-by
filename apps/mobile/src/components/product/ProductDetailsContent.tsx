@@ -35,9 +35,9 @@ export function ProductDetailsContent({
   if (state === "delete")
     return (
       <ConfirmationPanel
-        title="Remove opened product?"
-        message="Remove this item from your inventory."
-        confirmLabel="Remove item"
+        title="¿Eliminar el producto abierto?"
+        message="Elimina este producto de tu inventario."
+        confirmLabel="Eliminar producto"
         onConfirm={onCancelConfirmation}
         onCancel={onCancelConfirmation}
         destructive
@@ -46,9 +46,9 @@ export function ProductDetailsContent({
   if (state === "discard")
     return (
       <ConfirmationPanel
-        title="Edit opening date"
-        message="Opening dates determine the estimated expiration of this item."
-        confirmLabel="Keep current date"
+        title="Editar fecha de apertura"
+        message="La fecha de apertura determina el vencimiento estimado de este producto."
+        confirmLabel="Mantener fecha actual"
         onConfirm={onCancelConfirmation}
         onCancel={onCancelConfirmation}
       />
@@ -74,14 +74,14 @@ export function ProductDetailsContent({
         <Pill
           label={
             finished
-              ? "Finished"
+              ? "Terminado"
               : product.status === "unknown"
-                ? "Lifetime unavailable"
+                ? "Duración no disponible"
                 : product.status === "soon"
-                  ? "Use soon"
+                  ? "Usar pronto"
                   : product.status === "expired"
-                    ? "Expired"
-                    : "Fresh & active"
+                    ? "Vencido"
+                    : "Vigente"
           }
           color={color}
         />
@@ -106,78 +106,78 @@ export function ProductDetailsContent({
             {product.remainingLabel}
           </AppText>
           <AppText variant="caption" color={colors.textSecondary}>
-            after opening
+              después de abrir
           </AppText>
         </View>
         <View style={s.timeline}>
           <View style={[s.date, { backgroundColor: colors.surfaceLow }]}>
             <AppText variant="caption" color={colors.textSecondary}>
-              OPENED
+                ABIERTO
             </AppText>
             <AppText variant="label">{product.openedAtLabel}</AppText>
           </View>
           <View style={[s.date, { backgroundColor: colors.surfaceLow }]}>
             <AppText variant="caption" color={colors.textSecondary}>
-              ESTIMATED EXPIRATION
+                VENCIMIENTO ESTIMADO
             </AppText>
             <AppText variant="label">
-              {product.expirationLabel ?? "Unavailable"}
+                {product.expirationLabel ?? "No disponible"}
             </AppText>
           </View>
         </View>
       </Card>
       <View style={s.sectionTitle}>
-        <AppText variant="heading">Storage guide</AppText>
+        <AppText variant="heading">Guía de conservación</AppText>
         {product.trust === "trusted" ? (
           <AppText variant="caption" color={colors.primary}>
-            ✓ Verified rule
+              ✓ Regla verificada
           </AppText>
         ) : null}
       </View>
       <Card style={s.guide}>
         <GuideRow
           icon="category"
-          title={product.storageCondition ?? "Storage unavailable"}
+          title={product.storageCondition ?? "Conservación no disponible"}
           text={
             product.storageInstruction ??
-            "No verified instruction is available."
+            "No hay instrucciones verificadas disponibles."
           }
         />
         <View style={[s.line, { backgroundColor: colors.surfaceSecondary }]} />
         <GuideRow
           icon="clock"
-          title="Lifetime after opening"
-          text={product.lifetimeLabel ?? "No verified lifetime available."}
+          title="Duración después de abrir"
+          text={product.lifetimeLabel ?? "No hay una duración verificada disponible."}
         />
       </Card>
-      <AppText variant="heading">Expiration reminder</AppText>
+      <AppText variant="heading">Recordatorio de vencimiento</AppText>
       <Card style={s.identity}>
         <AppIcon name="notification" color={colors.primary} />
         <View style={s.flex}>
-          <AppText variant="label">Remind me before expiration</AppText>
+          <AppText variant="label">Avisarme antes del vencimiento</AppText>
           <AppText variant="caption" color={colors.textSecondary}>
             {product.reminderLabel}
           </AppText>
         </View>
         <Switch
-          accessibilityLabel="Expiration reminder"
+          accessibilityLabel="Recordatorio de vencimiento"
           value={reminder}
           onValueChange={setReminder}
           trackColor={{ true: colors.primary, false: colors.surfaceSecondary }}
         />
       </Card>
       <SecondaryButton
-        label={finished ? "Marked as finished" : "Mark as finished / empty"}
+        label={finished ? "Marcado como terminado" : "Marcar como terminado o vacío"}
         icon="success"
         onPress={() => setFinished(!finished)}
       />
       <SecondaryButton
-        label="Edit opening date"
+        label="Editar fecha de apertura"
         icon="edit"
         onPress={onDiscard}
       />
       <SecondaryButton
-        label="Discard & remove"
+        label="Descartar y eliminar"
         icon="delete"
         destructive
         onPress={onDelete}
