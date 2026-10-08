@@ -1,4 +1,5 @@
 import { sql } from 'drizzle-orm';
+import { user } from './auth-schema';
 import {
   uuid,
   integer,
@@ -70,6 +71,25 @@ export const productsTable = pgTable('products', {
   image_url: varchar({ length: 2048 }),
   country_code: varchar({ length: 2 }).notNull(),
   active: boolean().notNull().default(true),
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp({ withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+});
+
+export const userOpenedItemsTable = pgTable('user_opened_items', {
+  id: uuid().primaryKey(),
+  user_id: text()
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
+  product_id: uuid().references(() => productsTable.id),
+  barcode: varchar({ length: 32 }).notNull(),
+  product_name_snapshot: varchar({ length: 255 }).notNull(),
+  duration_hours_snapshot: integer(),
+  opened_at: timestamp({ withTimezone: true }).notNull(),
+  expires_at: timestamp({ withTimezone: true }),
+  status: varchar({ length: 50 }).notNull(),
   created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
   updated_at: timestamp({ withTimezone: true })
     .notNull()

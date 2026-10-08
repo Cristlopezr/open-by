@@ -43,6 +43,13 @@
       "when": 1790305730201,
       "tag": "0005_colossal_mentor",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791340429145,
+      "tag": "0006_tricky_squirrel_girl",
+      "breakpoints": true
     }
   ]
 }
